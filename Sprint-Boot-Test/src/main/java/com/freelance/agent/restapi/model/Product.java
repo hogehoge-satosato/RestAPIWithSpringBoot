@@ -7,16 +7,17 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class Product {
-
     private Long id;
     
-    @NotBlank
+    @NotBlank(message = "{NotBlank.productRequest.name}")
     private String name;
 
-    @DecimalMin("0.0")
+    @DecimalMin(value ="1.0", message = "{Min.productRequest.price}")
     private BigDecimal price;
 
     @Min(0)

@@ -10,4 +10,5 @@ public interface ProductService {
     public void createProduct(Product product);
     public void updateProduct(Product product);
     public void deleteProduct(Long id);
+    public boolean exists(Long id);
 }

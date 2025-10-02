@@ -31,4 +31,7 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(Long id) {
         productMapper.delete(id);
     }
+    public boolean exists(Long id) {
+        return productMapper.findById(id) != null;
+    }
 }
