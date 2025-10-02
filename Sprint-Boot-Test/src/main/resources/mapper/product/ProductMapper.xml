@@ -9,16 +9,16 @@
     SELECT * FROM product
   </select>
 
-  <select id="findById" parameterType="long" resultType="com.freelance.agent.restapi.model.Product">
+  <select id="findById" parameterType="long" resultType="Product">
     SELECT * FROM product WHERE id = #{id}
   </select>
 
-  <insert id="insert" parameterType="com.freelance.agent.restapi.model.Product">
+  <insert id="insert" parameterType="Product">
     INSERT INTO product (name, price, stock, description)
     VALUES (#{name}, #{price}, #{stock}, #{description})
   </insert>
 
-  <update id="update" parameterType="com.freelance.agent.restapi.model.Product">
+  <update id="update" parameterType="Product">
     UPDATE product
     SET name = #{name},
         price = #{price},
