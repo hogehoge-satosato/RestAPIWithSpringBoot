@@ -6,7 +6,7 @@
 <mapper namespace="com.freelance.agent.restapi.repository.ProductMapper">
 
   <select id="findAll" resultType="Product">
-    SELECT * FROM product
+    SELECT * FROM product order by id
   </select>
 
   <select id="findById" parameterType="long" resultType="Product">

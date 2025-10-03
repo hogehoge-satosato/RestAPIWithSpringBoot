@@ -11,7 +11,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * アプリケーション全体が起動されます。
  * </p>
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+        // 自動で読み込んでしまうので抑止
+        org.springframework.boot.autoconfigure.security.servlet.
+        UserDetailsServiceAutoConfiguration.class,
+        org.springframework.boot.autoconfigure.security.servlet.
+        SecurityAutoConfiguration.class,
+        org.springframework.boot.autoconfigure.security.reactive.
+        ReactiveSecurityAutoConfiguration.class,
+        org.springframework.boot.autoconfigure.security.reactive.
+        ReactiveUserDetailsServiceAutoConfiguration.class
+    })
 public final class SprintBootTestApplication {
 
     private SprintBootTestApplication() {  }

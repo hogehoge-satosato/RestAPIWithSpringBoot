@@ -1,4 +1,4 @@
-package com.freelance.agent.restapi.controler;
+package com.freelance.agent.restapi.controller;
 
 import java.util.List;
 import java.util.Locale;

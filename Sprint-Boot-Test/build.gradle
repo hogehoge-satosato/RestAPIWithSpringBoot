@@ -43,11 +43,19 @@ dependencies {
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
     testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'com.github.springtestdbunit:spring-test-dbunit:1.3.0'
+    testImplementation 'org.dbunit:dbunit:2.7.3'
+//    testImplementation 'org.dbunit:dbunit-postgresql:1.0.0'
 }
 
 tasks.named('test') {
     outputs.dir snippetsDir
     useJUnitPlatform()
+    systemProperty 'DB_PASSWORD', project.findProperty("DB_PASSWORD")
+    systemProperty 'DB_USERNAME', project.findProperty("DB_USERNAME")
+    systemProperty 'TEST_PASSWORD', project.findProperty("TEST_PASSWORD")
+    systemProperty 'TEST_USER', project.findProperty("TEST_USER")
+    
 }
 
 tasks.named('asciidoctor') {
