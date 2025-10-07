@@ -31,7 +31,7 @@ import com.freelance.agent.restapi.service.ProductService;
  * </p>
  */
 @RestController
-@RequestMapping("/products")
+@RequestMapping("api/products")
 public class ProductController {
 
     /** バリデーションエラーや存在しないリソースに関するログ出力用ロガー。 .*/
