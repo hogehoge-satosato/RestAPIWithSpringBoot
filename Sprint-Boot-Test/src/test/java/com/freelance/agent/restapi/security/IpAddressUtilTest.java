@@ -7,8 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import org.junit.jupiter.api.Test;
 
-import com.freelance.agent.restapi.security.IpAddressUtil;
-
 class IpAddressUtilTest {
 
     @Test

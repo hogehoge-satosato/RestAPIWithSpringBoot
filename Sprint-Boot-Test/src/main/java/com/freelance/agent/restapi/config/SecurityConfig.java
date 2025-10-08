@@ -6,7 +6,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.freelance.agent.restapi.security.CustomAccessDeniedHandler;
+import com.freelance.agent.restapi.security.CustomAuthenticationEntryPoint;
 import com.freelance.agent.restapi.service.CustomUserDetailsService;
 
 /** .
@@ -53,25 +53,31 @@ public class SecurityConfig {
      *
      * @param http {@link HttpSecurity} の設定オブジェクト
      * @param accessDeniedHandler {@link CustomAccessDeniedHandler} の例外ハンドラー
+     * @param customAuthEntryPoint エンドポイント
      * @return 構成済みの {@link SecurityFilterChain}
      * @throws Exception セキュリティ構成中の例外
      */
     @Bean
-    public SecurityFilterChain filterChain(
-            final HttpSecurity http,
-            final CustomAccessDeniedHandler accessDeniedHandler)
-                    throws Exception {
+    SecurityFilterChain filterChain(final HttpSecurity http,
+                                 final CustomAccessDeniedHandler accessDeniedHandler,
+                                 final CustomAuthenticationEntryPoint customAuthEntryPoint)
+            throws Exception {
+
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(HttpMethod.GET, "/products/**")
-                    .hasAnyRole("admin", "user")
-                .requestMatchers("/products/**").hasRole("admin")
+                .requestMatchers("/", "/index.html", "/static/**",
+                        "/favicon.ico").permitAll()
+                .requestMatchers("/products/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/products/**")
+                .hasAnyRole("admin", "user")
+                .requestMatchers("/api/products/**").hasRole("admin")
                 .anyRequest().authenticated()
             )
-            .httpBasic(Customizer.withDefaults())
-            .exceptionHandling(
-                    ex -> ex.accessDeniedHandler(accessDeniedHandler));
+            .httpBasic(httpBasic ->
+            httpBasic.authenticationEntryPoint(customAuthEntryPoint))
+            .exceptionHandling(ex ->
+            ex.accessDeniedHandler(accessDeniedHandler));
 
         return http.build();
     }
@@ -86,7 +92,7 @@ public class SecurityConfig {
      * @return 構成済みの {@link AuthenticationManager}
      */
     @Bean
-    public AuthenticationManager authenticationManager(
+    AuthenticationManager authenticationManager(
             final PasswordEncoder encoder) {
         DaoAuthenticationProvider provider =
                 new DaoAuthenticationProvider(userDetailsService);
@@ -100,7 +106,7 @@ public class SecurityConfig {
      * @return カスタムユーザー詳細サービス
      */
     @Bean
-    public UserDetailsService userDetailsService() {
+    UserDetailsService userDetailsService() {
         return userDetailsService;
     }
 
@@ -110,7 +116,7 @@ public class SecurityConfig {
      * @return BCrypt によるパスワードエンコーダー
      */
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

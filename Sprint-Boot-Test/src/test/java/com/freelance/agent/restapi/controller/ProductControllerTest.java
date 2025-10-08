@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -23,7 +22,6 @@ import com.freelance.agent.restapi.model.Product;
 import com.freelance.agent.restapi.service.ProductService;
 
 @WebMvcTest(ProductController.class)
-@Import(ProductController.class)
 class ProductControllerTest {
 
     @Autowired
@@ -39,8 +37,6 @@ class ProductControllerTest {
     private String USER;
     @Value("${TEST_PASSWORD}")
     private String PASS;
-
-    private long createdId;
 
     @Test
     void testGetAllProducts() throws Exception {
@@ -59,7 +55,7 @@ class ProductControllerTest {
 
         when(productService.getAllProducts()).thenReturn(List.of(p1, p2));
 
-        mockMvc.perform(get("/products")
+        mockMvc.perform(get("/api/products")
                .with(httpBasic(USER, PASS)))
                .andExpect(status().isOk())
                .andExpect(jsonPath("$[0].name").value("商品A"))
@@ -75,7 +71,7 @@ class ProductControllerTest {
         when(messageSource.getMessage("product.notfound.update", null, locale))
             .thenReturn("更新対象が見つかりません");
 
-        mockMvc.perform(put("/products/{id}", id)
+        mockMvc.perform(put("/api/products/{id}", id)
                 .with(httpBasic(USER, PASS))
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
@@ -94,7 +90,7 @@ class ProductControllerTest {
 
     @Test
     void testCreateProduct() throws Exception {
-        mockMvc.perform(post("/products")
+        mockMvc.perform(post("/api/products")
                 .with(httpBasic(USER, PASS))
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
@@ -118,7 +114,7 @@ class ProductControllerTest {
         when(messageSource.getMessage("product.notfound.delete", null, locale))
             .thenReturn("削除対象が見つかりません");
 
-        mockMvc.perform(delete("/products/{id}", id)
+        mockMvc.perform(delete("/api/products/{id}", id)
                 .with(httpBasic(USER, PASS))
                 .with(csrf())
                 .locale(locale))
@@ -138,7 +134,7 @@ class ProductControllerTest {
 
         when(productService.getProduct(id)).thenReturn(p1);
 
-        mockMvc.perform(get("/products/{id}", id)
+        mockMvc.perform(get("/api/products/{id}", id)
                .with(httpBasic(USER, PASS)))
                .andExpect(status().isOk())
                .andExpect(jsonPath("$.name").value("商品A"));
@@ -149,7 +145,7 @@ class ProductControllerTest {
         long id = 1L;
         when(productService.exists(id)).thenReturn(true);
 
-        mockMvc.perform(put("/products/{id}", id)
+        mockMvc.perform(put("/api/products/{id}", id)
                 .with(httpBasic(USER, PASS))
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
@@ -169,7 +165,7 @@ class ProductControllerTest {
         long id = 1L;
         when(productService.exists(id)).thenReturn(true);
 
-        mockMvc.perform(delete("/products/{id}", id)
+        mockMvc.perform(delete("/api/products/{id}", id)
                 .with(httpBasic(USER, PASS))
                 .with(csrf()))
                 .andExpect(status().isNoContent()); 
@@ -179,7 +175,7 @@ class ProductControllerTest {
         long id = 1L;
         when(productService.exists(id)).thenReturn(true);
 
-        mockMvc.perform(put("/products/{id}", id)
+        mockMvc.perform(put("/api/products/{id}", id)
                 .with(httpBasic(USER, PASS))
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
