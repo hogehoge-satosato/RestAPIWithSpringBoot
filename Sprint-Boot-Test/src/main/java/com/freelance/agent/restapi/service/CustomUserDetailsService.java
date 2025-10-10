@@ -43,7 +43,7 @@ public class CustomUserDetailsService implements UserDetailsService {
      * @throws UsernameNotFoundException ユーザーが存在しない場合
      */
     @Override
-    public UserDetails loadUserByUsername(final String username)
+    public CustomUserDetails loadUserByUsername(final String username)
             throws UsernameNotFoundException {
         UserEntity user = userMapper.findByLoginId(username);
         if (user == null) {

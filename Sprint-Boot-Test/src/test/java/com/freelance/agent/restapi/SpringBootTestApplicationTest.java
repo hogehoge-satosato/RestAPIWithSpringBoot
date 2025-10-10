@@ -4,13 +4,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /** .
- * {@link SprintBootTestApplication} の起動確認テスト。
+ * {@link SpringBootTestApplication} の起動確認テスト。
  * <p>
  * Spring Boot のアプリケーションコンテキストが正常にロードされるかを検証します。
  * </p>
  */
 @SpringBootTest
-class SprintBootTestApplicationTest {
+class SpringBootTestApplicationTest {
 
     /** .
      * アプリケーションコンテキストが正常に起動することを確認します。
@@ -20,11 +20,11 @@ class SprintBootTestApplicationTest {
         // コンテキスト起動のみを確認（例外が出なければ成功）
     }
     /** .
-     * {@link SprintBootTestApplication#main(String[])} を直接呼び出してカバレッジを補完します。
+     * {@link SpringBootTestApplication#main(String[])} を直接呼び出してカバレッジを補完します。
      */
     @Test
     void mainMethodShouldRun() {
-        SprintBootTestApplication.main(new String[] {});
+        SpringBootTestApplication.main(new String[] {});
     }
 
 }

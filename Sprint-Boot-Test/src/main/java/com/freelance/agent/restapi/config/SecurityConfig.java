@@ -29,7 +29,7 @@ import com.freelance.agent.restapi.service.CustomUserDetailsService;
 public class SecurityConfig {
 
     /** ユーザー認証情報を提供するカスタムサービス。 .*/
-    private final CustomUserDetailsService userDetailsService;
+    private final CustomUserDetailsService customUserDetailsService;
 
     /** .
      * コンストラクタインジェクションにより {@link CustomUserDetailsService} を受け取ります。
@@ -37,7 +37,7 @@ public class SecurityConfig {
      * @param service ユーザー情報を取得するサービス
      */
     public SecurityConfig(final CustomUserDetailsService service) {
-        this.userDetailsService = service;
+        this.customUserDetailsService = service;
     }
 
     /** .
@@ -95,7 +95,7 @@ public class SecurityConfig {
     AuthenticationManager authenticationManager(
             final PasswordEncoder encoder) {
         DaoAuthenticationProvider provider =
-                new DaoAuthenticationProvider(userDetailsService);
+                new DaoAuthenticationProvider(customUserDetailsService);
         provider.setPasswordEncoder(encoder);
         return new ProviderManager(provider);
     }
@@ -106,8 +106,8 @@ public class SecurityConfig {
      * @return カスタムユーザー詳細サービス
      */
     @Bean
-    UserDetailsService userDetailsService() {
-        return userDetailsService;
+    CustomUserDetailsService userDetailsService() {
+        return customUserDetailsService;
     }
 
     /** .

@@ -2,6 +2,8 @@ package com.freelance.agent.restapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 /** .
  * Spring Boot アプリケーションのエントリーポイント。
@@ -22,9 +24,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
         org.springframework.boot.autoconfigure.security.reactive.
         ReactiveUserDetailsServiceAutoConfiguration.class
     })
-public final class SprintBootTestApplication {
+public final class SpringBootTestApplication extends SpringBootServletInitializer {
 
-    private SprintBootTestApplication() {  }
+    private SpringBootTestApplication() {  }
     /** .
      * アプリケーションの起動メソッド。
      * <p>
@@ -34,6 +36,11 @@ public final class SprintBootTestApplication {
      * @param args コマンドライン引数
      */
     public static void main(final String[] args) {
-        SpringApplication.run(SprintBootTestApplication.class, args);
+        SpringApplication.run(SpringBootTestApplication.class, args);
+    }
+    
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+    	return builder.sources(SpringBootTestApplication.class);
     }
 }
