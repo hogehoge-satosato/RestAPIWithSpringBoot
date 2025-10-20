@@ -81,7 +81,10 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
-
+    
+    - name: Make gradlew executable
+      run: chmod +x gradlew
+      working-directory: Sprint-Boot-Test
     # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
     # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
     - name: Generate and submit dependency graph
