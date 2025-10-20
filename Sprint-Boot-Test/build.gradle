@@ -64,8 +64,8 @@ tasks.named('test') {
     systemProperty 'DB_URL', project.findProperty("DB_URL") ?: System.getenv('DB_URL')
     systemProperty 'DB_PASSWORD', project.findProperty("DB_PASSWORD") ?: System.getenv('DB_USERNAME')
     systemProperty 'DB_USERNAME', project.findProperty("DB_USERNAME") ?: System.getenv('DB_PASSWORD')
-    systemProperty 'TEST_PASSWORD', project.findProperty("TEST_PASSWORD")
-    systemProperty 'TEST_USER', project.findProperty("TEST_USER")
+    systemProperty 'TEST_PASSWORD', project.findProperty("TEST_PASSWORD") ?: System.getenv('TEST_PASSWORD')
+    systemProperty 'TEST_USER', project.findProperty("TEST_USER") ?: System.getenv('TEST_USER')
     
 }
 
