@@ -22,8 +22,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Change working directory
-      run: cd Sprint-Boot-Test
     - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
@@ -37,7 +35,7 @@ jobs:
 
     - name: Build with Gradle Wrapper
       run: ./gradlew build
-
+      working-directory: Sprint-Boot-Test
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
     #
