@@ -61,6 +61,7 @@ dependencies {
 tasks.named('test') {
     outputs.dir snippetsDir
     useJUnitPlatform()
+    systemProperty 'DB_URL', project.findProperty("DB_URL")
     systemProperty 'DB_PASSWORD', project.findProperty("DB_PASSWORD")
     systemProperty 'DB_USERNAME', project.findProperty("DB_USERNAME")
     systemProperty 'TEST_PASSWORD', project.findProperty("TEST_PASSWORD")
