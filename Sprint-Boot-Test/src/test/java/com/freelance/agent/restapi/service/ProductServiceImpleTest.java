@@ -30,7 +30,7 @@ import com.github.springtestdbunit.annotation.DbUnitConfiguration;
     TransactionalTestExecutionListener.class,
     DbUnitTestExecutionListener.class
 })
-class ProductServiceDbUnitTest {
+class ProductServiceImpleTest {
 
     @Autowired
     private ProductService productService;
