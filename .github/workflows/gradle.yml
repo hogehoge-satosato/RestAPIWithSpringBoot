@@ -37,7 +37,8 @@ jobs:
       DB_URL: jdbc:postgresql://postgres:5432/testdb
       DB_USERNAME: testuser
       DB_PASSWORD: testpass
-      
+      TEST_USER: admin
+      TEST_PASSWORD: admin123
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 21
