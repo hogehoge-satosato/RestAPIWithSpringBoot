@@ -49,9 +49,12 @@ jobs:
     - name: Make gradlew executable
       run: chmod +x gradlew
       working-directory: Sprint-Boot-Test
-    - name: Clean Gradle cache
-      run: ./gradlew clean --no-build-cache
-      working-directory: Sprint-Boot-Test
+    - name: Initialize database schema
+      run: |
+        psql -h localhost -U postgres -d postgres -f ./init.sql
+      env:
+        PGPASSWORD: postgres
+        
     - name: Build with Gradle Wrapper
       run: ./gradlew build
       working-directory: Sprint-Boot-Test
