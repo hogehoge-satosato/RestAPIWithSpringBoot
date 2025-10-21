@@ -7,4 +7,12 @@ CREATE TABLE user_info (
   role VARCHAR NOT NULL
 );
 INSERT INTO user_info VALUES ('admin', 'admin123', 'ADMIN');
-INSERT INTO user_info VALUES ('', 'admin123', 'ADMIN');
+
+CREATE TABLE product (
+  id INTEGER PRIMARY KEY,
+  name VARCHAR NOT NULL,
+  price INTEGER NOT NULL,
+  stock INTEGER NOT NULL,
+  description VARCHAR
+);
+
