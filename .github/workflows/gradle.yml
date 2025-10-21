@@ -23,8 +23,8 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_DB: root
-          POSTGRES_USER: root
+          POSTGRES_DB: postgres
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
@@ -56,8 +56,8 @@ jobs:
       run: ./gradlew build
       working-directory: Sprint-Boot-Test
       env:
-        DB_URL: jdbc:postgresql://localhost:5432/root
-        DB_USERNAME: root
+        DB_URL: jdbc:postgresql://localhost:5432/postgres
+        DB_USERNAME: postgres
         DB_PASSWORD: postgres
         TEST_USER: admin
         TEST_PASSWORD: admin123
