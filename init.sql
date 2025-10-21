@@ -7,6 +7,7 @@ CREATE TABLE user_info (
   role VARCHAR NOT NULL
 );
 INSERT INTO user_info VALUES ('admin', 'admin123', 'ADMIN');
+INSERT INTO user_info (login_id, password, role) VALUES ('sato', 'password123', 'ADMIN');
 
 CREATE TABLE product (
   id SERIAL PRIMARY KEY,
