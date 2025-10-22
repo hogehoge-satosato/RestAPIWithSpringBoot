@@ -20,3 +20,6 @@
  - Lombok
  - SpringRESTDocs
  - Validation
+
+## Action
+ - CI
