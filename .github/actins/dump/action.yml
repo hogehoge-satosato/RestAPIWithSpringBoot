@@ -1,0 +1,26 @@
+name: Dump
+description: |
+  環境変数とコンテキストの表示アクション
+inputs:
+  enable-context:
+    default: 'true'
+    required: false
+    description: コンテキストを表示するか
+outputs:
+  dump-date:
+    value: ${{ steps.current.outputs.date }}
+    description: 実行日時
+
+runs:
+  using: composite
+  steps:
+    - run: printenv | sort
+      shell: bash
+    - run: echo "${CONTEXT}"
+      if: ${{ inputs.enable-context == 'true'}}
+      env:
+        CONTEXT: ${{ toJSON(github) }} 
+      shell: bash
+    - id: current
+      run: echo "date=$(date)" >> ${GITHUB_OUTPUT}
+      shell: bash
