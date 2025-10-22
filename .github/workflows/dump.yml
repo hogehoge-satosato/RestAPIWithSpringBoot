@@ -1,5 +1,5 @@
 name: dump
-on: workflow-dispatch
+on: workflow_dispatch
 jobs:
   dumps:
     runs-on: ubuntu-latest
