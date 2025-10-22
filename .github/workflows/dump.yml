@@ -11,4 +11,4 @@ jobs:
           enable-context: 'true'
       - run: echo ${DATE}
         env:
-          DATE: ${{ steps.dump.outputs.date }}
+          DATE: ${{ steps.dump.outputs.dump-date }}
