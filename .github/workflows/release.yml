@@ -32,6 +32,6 @@ jobs:
 
       - run: |
          gh release create "${VERSION}" --title "${VERSION}" --generate-notes
-         gh release upload "${VERSION}" "Sprint-Boot-Test/build/libs/ROOT.war"
+         gh release upload "${VERSION}" "${RUNNER_TEMP}/Sprint-Boot-Test/build/libs/ROOT.war"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
