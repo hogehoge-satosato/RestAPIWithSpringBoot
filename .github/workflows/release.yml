@@ -27,7 +27,7 @@ jobs:
         working-directory: Sprint-Boot-Test
 
       - name: Build with Gradle Wrapper
-        run: ./gradlew war
+        run: ./gradlew bootWar
         working-directory: Sprint-Boot-Test
 
       - run: |
