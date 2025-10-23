@@ -2,7 +2,7 @@ name: Release
 on: 
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v*.*.*'
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -31,7 +31,7 @@ jobs:
         working-directory: Sprint-Boot-Test
 
       - run: |
-         gh release create "${VERSION}" --title "${VERSION}" --generate-note
-         gh release upload "${VERSION}" "${RUNNER_TEMP}/build/lib/ROOT.war"
+         gh release create "${VERSION}" --title "${VERSION}" --generate-notes
+         gh release upload "${VERSION}" "Sprint-Boot-Test/build/libs/ROOT.war"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
