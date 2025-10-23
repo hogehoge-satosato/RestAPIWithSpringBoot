@@ -5,6 +5,6 @@ updates:
     schedule: 
       interval: daily
   - package-ecosystem: gradle
-    directory: /
+    directory: /Sprint-Boot-Test
     schedule:
       interval: daily
