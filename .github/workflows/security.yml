@@ -1,0 +1,41 @@
+name: Secutrity
+on: 
+  push:
+    branches:
+      - main
+jobs:
+  repository_check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run OpenSSF Scorecard
+        run: |
+          docker run \
+            -e GITHUB_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }} \
+            gcr.io/openssf/scorecard:stable \
+            --repo="github.com/${{ github.repository }}"
+  secret_csan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Run secretlint
+        run: |
+          docker run --rm -v "$(pwd):$(pwd)" -w "$(pwd)" \
+          secretlint/secretlint secretlint '.' --maskSecrets
+  history_csan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Run secretlint
+        run: |
+          docker run --rm -v "$(pwd):$(pwd)" -w "$(pwd)" \
+          zricethezav/gitleaks detect --source "$(pwd)" --verbose --redact \
+          --log-opts="--all --full-history"
+    
