@@ -10,9 +10,12 @@ name: Java CI with Gradle
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'Sprint-Boot-Test/**'
   pull_request:
     branches: [ "main" ]
-
+    paths:
+      - 'Sprint-Boot-Test/**'
 jobs:
   build:
 
