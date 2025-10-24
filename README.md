@@ -23,3 +23,5 @@
 
 ## Action
  - CI
+ - Dependabot
+ - Release
