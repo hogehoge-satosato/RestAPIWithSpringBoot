@@ -11,7 +11,7 @@ jobs:
       security-events: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Run OpenSSF Scorecard
         run: |
           docker run \
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Run secretlint
         run: |
           docker run --rm -v "${{ github.workspace }}:/work" -w /work secretlint/secretlint secretlint "**/*"
@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Run secretlint
         run: |
           docker run --rm -v "$(pwd):$(pwd)" -w "$(pwd)" \
