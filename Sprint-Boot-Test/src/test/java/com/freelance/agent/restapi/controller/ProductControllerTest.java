@@ -12,16 +12,21 @@ import java.util.Locale;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.freelance.agent.restapi.config.MockMvcConfig;
 import com.freelance.agent.restapi.model.Product;
 import com.freelance.agent.restapi.service.ProductService;
 
-@WebMvcTest(ProductController.class)
+@SpringBootTest
+@Import(MockMvcConfig.class)
+@ActiveProfiles("test")
 class ProductControllerTest {
 
     @Autowired
