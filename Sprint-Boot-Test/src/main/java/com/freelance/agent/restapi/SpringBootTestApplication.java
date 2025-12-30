@@ -13,17 +13,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * アプリケーション全体が起動されます。
  * </p>
  */
-@SpringBootApplication(exclude = {
-        // 自動で読み込んでしまうので抑止
-        org.springframework.boot.autoconfigure.security.servlet.
-        UserDetailsServiceAutoConfiguration.class,
-        org.springframework.boot.autoconfigure.security.servlet.
-        SecurityAutoConfiguration.class,
-        org.springframework.boot.autoconfigure.security.reactive.
-        ReactiveSecurityAutoConfiguration.class,
-        org.springframework.boot.autoconfigure.security.reactive.
-        ReactiveUserDetailsServiceAutoConfiguration.class
-    })
+@SpringBootApplication
 public final class SpringBootTestApplication extends SpringBootServletInitializer {
 
     private SpringBootTestApplication() {  }
