@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v6
         name: checkout
       - id: meta
-        uses: dependabot/fetch-metadata@v2
+        uses: dependabot/fetch-metadata@v3
         name: get matadata
       - if: ${{ steps.meta.outputs.update-type == 'version-update:semver-patch' }}
         run: |
